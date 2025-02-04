@@ -1,59 +1,27 @@
 # FinanjaFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+## Descripción
 
-## Development server
+FinanjaFrontend es la interfaz de usuario de la aplicación de gestión financiera personal Finanja. Desarrollado con Angular, proporciona una experiencia intuitiva y dinámica para que los usuarios gestionen sus ingresos, gastos y presupuestos. Utiliza un diseño moderno y responsivo, asegurando una navegación fluida en cualquier dispositivo.
 
-To start a local development server, run:
+## Tecnologías utilizadas
 
-```bash
-ng serve
-```
+- Angular: Framework para el desarrollo de aplicaciones web SPA.
+- Tailwind CSS: Framework de estilos para una interfaz limpia y personalizable.
+- SweetAlert2: Notificaciones y alertas interactivas.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Características principales
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Autenticación y seguridad
+  - Inicio de sesión con JWT.
+- Gestor financiera
+  - CRUD para ingresos y gastos.
+  - Visualización de transacciones con filtros y paginación.
+- Categorías personalizadas
+  - Creación, edición y eliminación de categorías por usuario.
+- Reportes y estadísticas
+  - Gráficos interactivos con resumen mensual y anual.
+  - Exportación de reportes.
+- Experiencia de usuario optimizada
+  - Notificaciones con SweetAlert2.
+  - Diseño responsivo y accesible con Tailwind.
