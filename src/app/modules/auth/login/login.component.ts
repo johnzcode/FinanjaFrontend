@@ -38,12 +38,12 @@ export class LoginComponent implements OnInit{
           this.authService.login(credentials).subscribe({
             next: (res: LoginResponse) => {
               
-              localStorage.setItem('token', res.token);
+              localStorage.setItem('token', res.access_token);
               
               this.router.navigate(['/dashboard']);
             },
             error: (err) => {
-              this.errorMsg = err.error.msg || 'Credenciales inválidas o error en el servidor';
+              this.errorMsg = err.error.msg || 'Credenciales invalidas';
             }
           });
         }
