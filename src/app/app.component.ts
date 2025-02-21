@@ -1,11 +1,11 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { LoginComponent } from '@auth/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [LoginComponent],
+  imports: [RouterModule],
   providers: [
     {
         provide: HTTP_INTERCEPTORS, 
@@ -13,7 +13,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
         multi: true
     }
   ],
-  template: ` <app-login /> `
+  template: ` <router-outlet /> `
 })
 export class AppComponent {
   title = 'FinanjaFrontend';
