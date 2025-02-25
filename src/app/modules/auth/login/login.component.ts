@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService, LoginResponse } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -18,38 +19,38 @@ export class LoginComponent implements OnInit{
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private alertService: AlertService
     ){}
 
     ngOnInit(): void {
-        if (this.authService.isLoggedIn()) {
-            this.router.navigate(['/dashboard']);
-        }
-
         this.loginForm = this.fb.group({
-          email: ['', [Validators.required, Validators.email]],
+          email: ['', Validators.required],
           password: ['', Validators.required]
         });
     }
 
     onSubmit(): void {
-        if (this.loginForm) {
-          const credentials = {
+        if (this.loginForm.invalid) {
+            return;
+        }
+
+        const credentials = {
             emailOrUsername: this.loginForm.value.email,
             password: this.loginForm.value.password
-          };
-    
-          this.authService.login(credentials).subscribe({
-            next: (res: LoginResponse) => {
-              
-              localStorage.setItem('token', res.access_token);
-              
-              this.router.navigate(['/dashboard']);
-            },
-            error: (err) => {
-              this.errorMsg = err.error.msg || 'Credenciales invalidas';
-            }
-          });
-        }
+        };
+  
+        this.authService.login(credentials).subscribe({
+          next: (res: LoginResponse) => {
+            
+            localStorage.setItem('token', res.access_token);
+            
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            this.errorMsg = err.error.msg || 'Credenciales invalidas';
+            this.alertService.showAlert('Nombre de usuario o contraseña incorrecta', 'Advertencia!', 'warning');
+          }
+        });
     }
 }
