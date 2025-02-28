@@ -4,6 +4,7 @@ import { AuthService, LoginResponse } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AlertService } from '../../../services/alert.service';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit{
         private fb: FormBuilder,
         private authService: AuthService,
         private router: Router,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private loadService: LoadingService
     ){}
 
     ngOnInit(): void {
@@ -39,15 +41,20 @@ export class LoginComponent implements OnInit{
             emailOrUsername: this.loginForm.value.email,
             password: this.loginForm.value.password
         };
+
+        this.loadService.show();
   
         this.authService.login(credentials).subscribe({
           next: (res: LoginResponse) => {
+
+            this.loadService.hide();
             
             localStorage.setItem('token', res.access_token);
             
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
+            this.loadService.hide();
             this.errorMsg = err.error.msg || 'Credenciales invalidas';
             this.alertService.showAlert('Nombre de usuario o contraseña incorrecta', 'Advertencia!', 'warning');
           }
