@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService, LoginResponse } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,10 @@ import { LoadingService } from '../../../services/loading.service';
 export class LoginComponent implements OnInit{
     
     loginForm!: FormGroup;
-    fieldNames: string[] = ['email', 'password'];
+    fieldNames = [
+        { name: 'email', required: true },
+        { name: 'password', required: true }
+    ];
     errorMsg: string = '';
 
     constructor(
@@ -27,16 +30,13 @@ export class LoginComponent implements OnInit{
     ){}
 
     ngOnInit(): void {
-        this.loginForm = this.fb.group(
-            this.fieldNames.reduce((acc, field) => {
-                acc[field] = ['', Validators.required];
-                return acc;
-            }, {} as any)
-        );
-    }
+        let formGroup: { [key: string]: FormControl } = {};
 
-    capitalizeFirstLetter(text: string): string {
-        return text.charAt(0).toUpperCase() + text.slice(1);
+        this.fieldNames.forEach(field => {
+            formGroup[field.name] = new FormControl('', field.required ? [Validators.required] : []);
+        });
+
+        this.loginForm = new FormGroup(formGroup);
     }
 
     onSubmit(): void {
