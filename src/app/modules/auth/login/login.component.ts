@@ -15,6 +15,7 @@ import { LoadingService } from '../../../services/loading.service';
 export class LoginComponent implements OnInit{
     
     loginForm!: FormGroup;
+    fieldNames: string[] = ['email', 'password'];
     errorMsg: string = '';
 
     constructor(
@@ -26,10 +27,16 @@ export class LoginComponent implements OnInit{
     ){}
 
     ngOnInit(): void {
-        this.loginForm = this.fb.group({
-          email: ['', Validators.required],
-          password: ['', Validators.required]
-        });
+        this.loginForm = this.fb.group(
+            this.fieldNames.reduce((acc, field) => {
+                acc[field] = ['', Validators.required];
+                return acc;
+            }, {} as any)
+        );
+    }
+
+    capitalizeFirstLetter(text: string): string {
+        return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
     onSubmit(): void {

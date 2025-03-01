@@ -42,18 +42,19 @@
                     @if (loginForm) {
                         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                             <div class="mx-auto max-w-xs">
-                                <input
-                                    class="w-full px-8 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="email" 
-                                    placeholder="Email"
-                                    formControlName="email"
+                                @for (field of fieldNames; track $index) {
+                                    <input
+                                        class="w-full px-8 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-3"
+                                        [type]="field === 'password' ? 'password' : 'text'"
+                                        [placeholder]="capitalizeFirstLetter(field)"
+                                        [formControlName]="field"
                                     />
-                                <input
-                                    class="w-full px-8 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="password" 
-                                    placeholder="Contraseña"
-                                    formControlName="password"
-                                    />
+                                    @if (loginForm.controls[field].touched && loginForm.controls[field].invalid) {
+                                        <span class="text-red-500 text-sm mt-1 block text-center">
+                                            El campo es requerido.
+                                        </span>
+                                    }
+                                }
                                 <button
                                     class="cursor-pointer mt-5 tracking-wide font-semibold bg-green-400 text-white-500 w-full py-2 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                     type="submit">
