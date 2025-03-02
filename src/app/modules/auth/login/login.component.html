@@ -1,11 +1,11 @@
 <div class="min-h-[80vh] bg-gray-100 text-gray-900 flex justify-center">
-    <div class="m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-        <div class="lg:w-1/2 xl:w-5/12 p-4 sm:p-8">
+    <div class="m-0 sm:m-5 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+        <div class="lg:w-1/2 xl:w-5/12 p-4 sm:p-6">
             <div>
-                <img src="assets/images/logo.png" class="mx-auto w-16" alt="Imagen de fondo">
+                <img src="assets/images/logo.png" class="mx-auto w-12" alt="Imagen de fondo">
             </div>
             <div class="flex flex-col items-center">
-                <div class="w-full flex-1 mt-8">
+                <div class="w-full flex-1 mt-5">
                     <div class="flex flex-col items-center">
                         <button
                             class="cursor-pointer w-full max-w-xs font-bold shadow-sm rounded-lg py-2 bg-green-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
@@ -32,7 +32,7 @@
 
                     </div>
 
-                    <div class="my-8 border-b text-center">
+                    <div class="my-5 border-b text-center">
                         <div
                             class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
                             O inice sesión con email registrado
@@ -49,14 +49,12 @@
                                         [placeholder]="field.name | titlecase"
                                         [formControlName]="field.name"
                                     />
-                                    @if (loginForm.controls[field.name].touched && loginForm.controls[field.name].invalid) {
-                                        <span class="text-red-500 text-sm mt-1 block text-center">
-                                            El campo es requerido.
-                                        </span>
-                                    }
+                                    <span class="text-red-500 text-sm mt-1 block text-center min-h-[20px]">
+                                        {{ (loginForm.controls[field.name].touched && loginForm.controls[field.name].invalid) ? 'El campo es requerido.' : ' ' }}
+                                    </span>
                                 }
                                 <button
-                                    class="cursor-pointer mt-5 tracking-wide font-semibold bg-green-400 text-white-500 w-full py-2 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                    class="cursor-pointer mt-3 tracking-wide font-semibold bg-green-400 text-white-500 w-full py-2 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                     type="submit">
                                     <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
